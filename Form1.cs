@@ -18,7 +18,7 @@ namespace 期中作業
         int potion = 1;
 
         int enyhealth = 100;
-        int enyatk = 20;
+        int enyatk = 30;
 
         bool isAtk = false;
 
@@ -32,11 +32,11 @@ namespace 期中作業
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            isAtk = true;
             enyhealth -= atk;
             label5.Text = enyhealth.ToString();
             BattleTable(3);
-            BattleTable(1);
-            isAtk = true;
+            BattleTable(1);           
             enemy();
         }
         private void button2_Click(object sender, EventArgs e)
@@ -75,20 +75,24 @@ namespace 期中作業
             if (i >= 3)
             {
                 health -= enyatk;
-                label3.Text = health.ToString();
                 BattleTable(6);
             }
             else
             {
-                if(isAtk == true) 
+                if (isAtk == true)
                 {
-                    enyhealth += 20;                   
+                    enyhealth += atk;
+                    BattleTable(7);
                 }
-                BattleTable(7);
             }
-            BattleTable(2);
-            enyatk = 20;
             isAtk = false;
+            BattleTable(2);
+            label3.Text = health.ToString();
+            label5.Text = enyhealth.ToString();
+            enyatk = 30;
+            if (enyhealth <= 0 && health <= 0) { label8.Visible = true; Lose(); }
+            else if (health <= 0) { label7.Visible = true; Lose(); }
+            else if (enyhealth <= 0) { label6.Visible = true; Lose(); }
         }
 
         void BattleTable(int x)
@@ -146,6 +150,50 @@ namespace 期中作業
             button3.Visible = true;
             button4.Visible = true;
             button5.Visible = false;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            label1.Visible = true;
+            label2.Visible = true;
+            label3.Visible = true;
+            label5.Visible = true;
+            label4.Visible = true;
+            textBox1.Visible = true;
+            button1.Visible = true;
+            button2.Visible = true;
+            button3.Visible = true;
+            button4.Visible = true;
+            button6.Visible = false;
+
+            label8.Visible = false;
+            label7.Visible = false;
+            label6.Visible = false;
+
+            potion = 1;
+            health = 100;
+            enyhealth = 100;
+            label3.Text = health.ToString();
+            label5.Text = enyhealth.ToString();
+            label4.Text = potion.ToString() + "x";
+            Queue bt = new Queue();
+            btNum = 0;
+            BattleTable(0);
+        }
+
+        void Lose()
+        {          
+            label1.Visible = false;
+            label2.Visible = false;
+            label3.Visible = false;
+            label5.Visible = false;
+            label4.Visible = false;
+            textBox1.Visible = false;
+            button1.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
+            button4.Visible = false;
+            button6.Visible = true;
         }
 
     }
