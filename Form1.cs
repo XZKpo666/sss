@@ -178,6 +178,7 @@ namespace 期中作業
             label4.Text = potion.ToString() + "x";
             Queue bt = new Queue();
             btNum = 0;
+            textBox1.Text = "";
             BattleTable(0);
         }
 
